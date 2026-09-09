@@ -13,5 +13,5 @@ resource "google_compute_instance" "devops_vm" {
     network = "default"
   }
 
-  tags = ["http-server"]
+  # tags = ["http-server"]
 }
