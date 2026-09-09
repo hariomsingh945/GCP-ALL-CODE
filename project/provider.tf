@@ -9,5 +9,5 @@ terraform {
 
 provider "google" {
   project = "hariom-0504-01-cbt"
-  region  = "us-central1"
+  region  = "us-central11"
 }
