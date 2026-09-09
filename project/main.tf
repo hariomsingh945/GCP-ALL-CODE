@@ -1,6 +1,17 @@
-# resource "google_project" "create_project" {
-#   name       = "test-project-id23456"
-#   project_id = "test-project-id23456"
-#   billing_account = "01C41B-0A7288-4C2013"
-#   deletion_policy = "DELETE"
-# }
+resource "google_compute_instance" "devops_vm" {
+  name         = "devops-vm"
+  zone         = "us-central1-a"
+  machine_type = "e2-micro"
+
+  boot_disk {
+    initialize_params {
+      image = "ubuntu-os-cloud/ubuntu-2004-lts"
+    }
+  }
+
+  network_interface {
+    network = "default"
+  }
+
+  tags = ["http-server"]
+}

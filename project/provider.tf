@@ -8,5 +8,6 @@ terraform {
 }
 
 provider "google" {
-  # Configuration options
+  project = "hariom-0504-01-cbt"
+  region  = "us-central1"
 }
