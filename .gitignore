@@ -22,7 +22,7 @@ override.tf.json
 *.plan
 
 # GCP Service Account credentials
-#*.json
+*.json
 !package.json
 !package-lock.json
 
