@@ -7,7 +7,7 @@ pipeline {
             steps {
                 withCredentials([
                     file(
-                        credentialsId: 'gcp-jenkins-sa-key',
+                        credentialsId: 'jenkin-gcp-service-account',
                         variable: 'GCP_KEY_FILE'
                     )
                 ]) {
@@ -24,12 +24,14 @@ pipeline {
                 }
             }
         }
+    }
+}
 
         stage('Terraform Init') {
             steps {
                 withCredentials([
                     file(
-                        credentialsId: 'gcp-jenkins-sa-key',
+                        credentialsId: 'jenkin-gcp-service-account',
                         variable: 'GOOGLE_APPLICATION_CREDENTIALS'
                     )
                 ]) {
