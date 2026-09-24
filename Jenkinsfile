@@ -34,6 +34,7 @@ pipeline {
                     )
                 ]) {
                     sh '''
+                        cd project
                         terraform init
                     '''
                 }
