@@ -1,43 +1,41 @@
 pipeline {
     agent any
 
+    environment {
+        GOOGLE_APPLICATION_CREDENTIALS = credentials('jenkin-gcp-service-account')
+    }
+
     stages {
 
         stage('GCP Authentication') {
             steps {
-                withCredentials([
-                    file(
-                        credentialsId: 'jenkin-gcp-service-account',
-                        variable: 'GCP_KEY_FILE'
-                    )
-                ]) {
-                    sh '''
-                        gcloud auth activate-service-account \
-                          --key-file="$GCP_KEY_FILE"
+                sh '''
+                    gcloud auth activate-service-account \
+                      --key-file="$GOOGLE_APPLICATION_CREDENTIALS"
 
-                        gcloud auth list
+                    gcloud auth list
 
-                        gcloud config set project hariom-0504-01-cbt
+                    gcloud config set project hariom-0504-01-cbt
 
-                        gcloud config get-value project
-                    '''
-                }
+                    gcloud config get-value project
+                '''
             }
         }
 
         stage('Terraform Init') {
             steps {
-                withCredentials([
-                    file(
-                        credentialsId: 'jenkin-gcp-service-account',
-                        variable: 'GOOGLE_APPLICATION_CREDENTIALS'
-                    )
-                ]) {
-                    sh '''
-                        cd project
-                        terraform init
-                    '''
-                }
+                sh '''
+                    cd project
+                    terraform init
+                '''
+            }
+        }
+        stage('Terraform plan') {
+            steps {
+                sh '''
+                    cd project
+                    terraform plan
+                '''
             }
         }
     }
